@@ -1,6 +1,6 @@
 use std::error::Error;
-use std::io::{self};
 use std::fmt::Write;
+use std::io::{self};
 
 fn main() -> Result<(), Box<dyn Error>> {
     let mut numbers = Vec::new();
@@ -56,7 +56,6 @@ fn median(a: &[f64]) -> f64 {
     }
 }
 
-
 fn modes(a: &[f64]) -> Vec<f64> {
     let mut counts = Vec::new();
     for &x in a {
@@ -68,7 +67,7 @@ fn modes(a: &[f64]) -> Vec<f64> {
                 break;
             }
         }
-        if!found {
+        if !found {
             counts.push((x, 1));
         }
     }
@@ -93,7 +92,6 @@ fn modes(a: &[f64]) -> Vec<f64> {
     modes
 }
 
-
 fn stdev(a: &[f64]) -> f64 {
     let mean = mean(a);
     let variance = a.iter().map(|&x| (x - mean).powi(2)).sum::<f64>() / (a.len() - 1) as f64;
@@ -101,7 +99,7 @@ fn stdev(a: &[f64]) -> f64 {
 }
 
 fn histogram(a: &[f64]) -> String {
-    let mut buckets = vec![0; 10];
+    let mut buckets = [0; 10];
     let min = min(a);
     let max = max(a);
     let delta = (max - min) / 10.0;
@@ -119,7 +117,16 @@ fn histogram(a: &[f64]) -> String {
         let range_start = min + (i as f64 * delta);
         let range_end = min + ((i + 1) as f64 * delta);
         let percentage = (count as f64 / total as f64) * 100.0;
-        writeln!(output, "{:.4}-{:.4}\t{}\t{:.*}", range_start, range_end, count, 2, "*".repeat((percentage * 2.0) as usize)).unwrap();
+        writeln!(
+            output,
+            "{:.4}-{:.4}\t{}\t{:.*}",
+            range_start,
+            range_end,
+            count,
+            2,
+            "*".repeat((percentage * 2.0) as usize)
+        )
+        .unwrap();
     }
 
     output
