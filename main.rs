@@ -16,26 +16,27 @@ fn main() -> Result<(), Box<dyn Error>> {
         input.clear();
     }
 
-    println!("n {}", numbers.len());
-    println!("min {:.4}", min(&numbers));
-    println!("max {:.4}", max(&numbers));
-    println!("sum {:.4}", sum(&numbers));
-    println!("mean {:.4}", mean(&numbers));
-    println!("median {:.4}", median(&numbers));
-    println!("modes {:?}", modes(&numbers));
-    println!("stdev {:.4}", stdev(&numbers));
-    println!("{}", histogram(&numbers));
+    println!("n {}\nmin {:.4}\nmax {:.4}\nsum {:.4}\nmean {:.4}\nmedian {:.4}\nmodes {:?}\nstdev {:.4}\n{}",
+         numbers.len(),
+         min(&numbers),
+         max(&numbers),
+         sum(&numbers),
+         mean(&numbers),
+         median(&numbers),
+         modes(&numbers),
+         stdev(&numbers),
+         histogram(&numbers));
 
     Ok(())
 }
 
- fn min(a: &[f64]) -> f64 {
+fn min(a: &[f64]) -> f64 {
     a.iter().copied().fold(f64::INFINITY, f64::min)
- }
+}
 
- fn max(a: &[f64]) -> f64 {
+fn max(a: &[f64]) -> f64 {
     a.iter().copied().fold(f64::NEG_INFINITY, f64::max)
- }
+}
 
 fn sum(a: &[f64]) -> f64 {
     a.iter().sum()
