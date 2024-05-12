@@ -29,13 +29,13 @@ fn main() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-fn min(a: &[f64]) -> f64 {
-    a.iter().cloned().fold(f64::INFINITY, |a, b| a.min(b))
-}
+ fn min(a: &[f64]) -> f64 {
+    a.iter().copied().fold(f64::INFINITY, f64::min)
+ }
 
-fn max(a: &[f64]) -> f64 {
-    a.iter().cloned().fold(f64::NEG_INFINITY, |a, b| a.max(b))
-}
+ fn max(a: &[f64]) -> f64 {
+    a.iter().copied().fold(f64::NEG_INFINITY, f64::max)
+ }
 
 fn sum(a: &[f64]) -> f64 {
     a.iter().sum()
