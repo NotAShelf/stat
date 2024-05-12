@@ -6,7 +6,14 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut numbers = Vec::new();
     let mut input = String::new();
 
-    while io::stdin().read_line(&mut input).unwrap() > 0 {
+    loop {
+        let bytes_read = io::stdin().read_line(&mut input)?;
+        // exit loop on EOF
+        if bytes_read == 0 {
+            break;
+        }
+
+        // split input into words and parse each word as a float
         for word in input.split_whitespace() {
             match word.parse::<f64>() {
                 Ok(num) => numbers.push(num),
